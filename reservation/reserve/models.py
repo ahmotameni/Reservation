@@ -20,6 +20,7 @@ class Food(models.Model):
     name = models.CharField(max_length=20)
     image = models.ImageField()
     price = models.SmallIntegerField()
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     details = models.CharField(max_length=200)
 
 
@@ -54,14 +55,14 @@ class Opinion(models.Model):
     # score = models.SmallIntegerField()
 
 
-class Menu(models.Model):  # Menu of each restaurant
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+# class Menu(models.Model):  # Menu of each restaurant
+#     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+#     food = models.ForeignKey(Food, on_delete=models.CASCADE)
 
 
-class RestaurantsTables(models.Model):  # which table is in which restaurant
-    table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+# class RestaurantsTables(models.Model):  # which table is in which restaurant
+#     table = models.ForeignKey(Table, on_delete=models.CASCADE)
+#     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
 
 class VIPCustomers(models.Model):  # VIP Customers for each restaurant

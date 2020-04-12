@@ -7,15 +7,27 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=20)
     email = models.EmailField()
     phone_number = models.PositiveIntegerField()
-    # ToDo: add some other things like "Favorites" or "Past Orders"
 
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=20)
     address = models.CharField(max_length=500)
     logo = models.ImageField()
-    score = models.FloatField()
-    # ToDo: add tables and...
+    score = models.FloatField()  # should be calculated from data in Opinion class
+
+
+class Food(models.Model):
+    name = models.CharField(max_length=20)
+    image = models.ImageField()
+    price = models.SmallIntegerField()
+    details = models.CharField(max_length=200)
+
+
+class Table(models.Model):
+    num_of_sits = models.SmallIntegerField()
+    price = models.SmallIntegerField()
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    details = models.CharField(max_length=200)
 
 
 class Order(models.Model):
@@ -25,21 +37,38 @@ class Order(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
     num_of_customers = models.SmallIntegerField()
-    customers_opinion = models.CharField(max_length=200)
-    customers_score = models.SmallIntegerField()
+    # customers_opinion = models.CharField(max_length=200)
+    # customers_score = models.SmallIntegerField()
 
 
-class Food(models.Model):
-    name = models.CharField(max_length=20)
-    image = models.ImageField()
-    price = models.SmallIntegerField()
-    # Todo: add opinions
+class TableStatusPerHour(models.Model):
+    time = models.DateTimeField()
+    status = models.BooleanField()  # True: available / False: in use
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
 
 
-class Table(models.Model):
-    num_of_sits = models.SmallIntegerField()
-    price = models.SmallIntegerField()
+class Opinion(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    # ToDo: add status for each hour
+    text = models.CharField(max_length=200)
+    # score = models.SmallIntegerField()
 
 
+class Menu(models.Model):  # Menu of each restaurant
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+
+
+class RestaurantsTables(models.Model):  # which table is in which restaurant
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+
+class VIPCustomers(models.Model):  # VIP Customers for each restaurant
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+
+class CustomersFavorites(models.Model):  # Favorite orders of each customer
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)

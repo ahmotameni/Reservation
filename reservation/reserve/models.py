@@ -29,6 +29,7 @@ class Table(models.Model):
     price = models.SmallIntegerField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     details = models.CharField(max_length=200)
+    status = models.BooleanField(default=True)
 
 
 class Order(models.Model):
@@ -38,8 +39,7 @@ class Order(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
     num_of_customers = models.SmallIntegerField()
-    # customers_opinion = models.CharField(max_length=200)
-    # customers_score = models.SmallIntegerField()
+    text = models.CharField(max_length=200, default='')
 
 
 class TableStatusPerHour(models.Model):
@@ -52,17 +52,7 @@ class Opinion(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
-    # score = models.SmallIntegerField()
-
-
-# class Menu(models.Model):  # Menu of each restaurant
-#     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-#     food = models.ForeignKey(Food, on_delete=models.CASCADE)
-
-
-# class RestaurantsTables(models.Model):  # which table is in which restaurant
-#     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-#     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    score = models.SmallIntegerField(default=0)
 
 
 class VIPCustomers(models.Model):  # VIP Customers for each restaurant

@@ -86,11 +86,11 @@ body {
               <div class = "row justify-content-center">
                 <div class = 'col-md-12 text-center'>
                     
-                    <h2 class = "display-3 font-bold white-text mb-2">منوی سگ دست</h2>
+                    <h2 class = "display-3 font-bold white-text mb-2">منوی غذا</h2>
                     <!-- divider -->
                     <hr class="hr-light">
                     <!-- description -->
-                    <h4 class = "white-text my-4"> در رستوران عباس سگ پز</h4>
+                    <h4 class = "white-text my-4"> {{restaurant.name}} </h4>
 
                 </div>
               </div>
@@ -110,8 +110,8 @@ body {
         <section id = "menu" class = "text-center">
             
             
-        {% for food in foods %}
           <div class="row">
+        {% for food in foods %}
               <div class="col-lg-4 col-md-12 mb-4">
                   <!-- Card -->
 
@@ -144,8 +144,8 @@ body {
 
       </div>
               </div>
-          </div>
         {% endfor %}
+          </div>
 
             </div>
           </div>

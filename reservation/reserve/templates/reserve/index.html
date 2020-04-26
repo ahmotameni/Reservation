@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="fa" dir="rtl">
 
 
@@ -9,13 +11,13 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>رزرو</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'reserve/maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %}">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'reserve/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="{% static 'reserve/css/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'reserve/css/menu-style.css' %}" rel="stylesheet">
 <style>
 body {
     font-family: "shabnam", Roboto,sans-serif;
@@ -103,7 +105,7 @@ body {
                     <!-- divider -->
                     <hr class="hr-light">
                     <!-- description -->
-                    <h4 class = "white-text my-4"> سیستم رزرو میز در رستوران عباس سگ پز</h4>
+                    <h4 class = "white-text my-4"> سیستم رزرو میز در رستوران {{restaurant.name}}</h4>
         
                     <button class = "btn btn-outline-white"> بزن بریم </button>
                 </div>

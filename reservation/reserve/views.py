@@ -1,5 +1,8 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Food
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def menu(request):
+    foods = Food.objects.all()
+    context = {'foods': foods}
+    return render(request, 'reserve/menu.html', context)

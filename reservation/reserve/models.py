@@ -1,4 +1,5 @@
 from django.db import models
+photo_path = 'img/'
 
 
 class Customer(models.Model):
@@ -8,6 +9,9 @@ class Customer(models.Model):
     email = models.EmailField()
     phone_number = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.username
+
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=20)
@@ -15,13 +19,19 @@ class Restaurant(models.Model):
     logo = models.ImageField()
     score = models.FloatField()  # should be calculated from data in Opinion class
 
+    def __str__(self):
+        return self.name
+
 
 class Food(models.Model):
     name = models.CharField(max_length=20)
-    image = models.ImageField()
+    image = models.ImageField(upload_to=photo_path)
     price = models.SmallIntegerField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     details = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 
 class Table(models.Model):
